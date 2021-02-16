@@ -1,0 +1,44 @@
+﻿@model CarsApp.Models.Manufacturer
+@{
+    ViewData["Title"] = "CarsByManufacturer";
+}
+
+
+<h3>@Html.DisplayFor(model => model.Name) Models</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Model Year
+            </th>
+            <th>
+                Type
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Cars)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    <a asp-controller="Driver" asp-action="CarDetails" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

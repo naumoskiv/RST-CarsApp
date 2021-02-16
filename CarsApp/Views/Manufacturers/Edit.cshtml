@@ -1,0 +1,73 @@
+﻿@model CarsApp.Models.Manufacturer
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Manufacturer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Country" class="control-label"></label>
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Headquarters" class="control-label"></label>
+                <input asp-for="Headquarters" class="form-control" />
+                <span asp-validation-for="Headquarters" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Founded" class="control-label"></label>
+                <input asp-for="Founded" class="form-control" />
+                <span asp-validation-for="Founded" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @if (Model.ManufacturerPicture == null)
+                {
+                    <label class="control-label">Picture</label>
+                    <input type="file" name="imageUrl" />
+                }
+                else
+                {
+                    <label>Chosen picture:</label>
+                    <img src="~/ManufacturerImages/@Model.ManufacturerPicture"
+                         height="100" width="100"
+                         asp-append-version="true" />
+                    <br />
+                    <input type="file" name="imageUrl" />
+                }
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

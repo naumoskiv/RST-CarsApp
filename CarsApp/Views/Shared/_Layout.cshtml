@@ -1,0 +1,107 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> signInManager
+@inject UserManager<AppUser> userManager
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CarsApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/logo.png" width="40" height="40"/> Cars App</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Manufacturers" asp-action="Index">Manufacturers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Cars" asp-action="Index">Cars</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Drivers" asp-action="Index">Drivers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Reviews" asp-action="Index">Reviews</a>
+                            </li>
+                        }
+
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Driver"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Driver" asp-action="Manufacturers">Manufacturers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Driver" asp-action="Cars">Cars</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Driver" asp-action="ReviewList">Reviews</a>
+                            </li>
+                        }
+
+                        @if (!signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Guest" asp-action="Manufacturers">Manufacturers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Guest" asp-action="Cars">Cars</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+
+                <div class=" float-right pull-right">
+                    <ul class="nav navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a class="text-secondary" asp-area="" asp-controller="Account" asp-action="UserInfo">@(User.Identity.Name)</a></li>
+                            <li>    |   </li>
+                            <li><a class="text-danger" asp-area="" asp-controller="Account" asp-action="Logout">Log Out</a></li>
+                        }
+                        else
+                        {
+                            <li><a class="text-secondary" asp-area="" asp-controller="Account" asp-action="Login">Log In</a></li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted bg-dark">
+        <div class="container text-light">
+            &copy; 2020 - Cars App - <a class="text-secondary" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

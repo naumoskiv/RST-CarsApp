@@ -1,0 +1,66 @@
+﻿@model CarsApp.ViewModels.ManufacturerViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Manufacturer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Country" class="control-label"></label>
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Headquarters" class="control-label"></label>
+                <input asp-for="Headquarters" class="form-control" />
+                <span asp-validation-for="Headquarters" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Founded" class="control-label"></label>
+                <input asp-for="Founded" class="form-control" />
+                <span asp-validation-for="Founded" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="ManufacturerPicture" class="control-label"></label>
+                    <div class="custom-file">
+                        <input asp-for="ManufacturerPicture" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                    <span asp-validation-for="ManufacturerPicture" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

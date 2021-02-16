@@ -1,0 +1,74 @@
+﻿@model CarsApp.Models.Manufacturer
+
+@{
+    ViewData["Title"] = "Manufacturer Details";
+    var photoPath = "~/ManufacturerImages/" + (Model.ManufacturerPicture ?? "blankImage.png");
+}
+
+<h1>Manufacturer Details</h1>
+
+<div>
+    <h4>Manufacturer @Html.DisplayFor(model => model.Name)</h4>
+    <hr />
+    <img src="@photoPath"
+         height="200" width="200"
+         asp-append-version="true" />
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Headquarters)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Headquarters)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Founded)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Founded)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cars)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Model</th>
+                    <th>Model Year</th>
+                    <th>Chassis Type</th>
+                </tr>
+                @foreach (var item in Model.Cars)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModelYear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Manufacturers">Back to List</a>
+</div>

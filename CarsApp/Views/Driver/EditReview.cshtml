@@ -1,0 +1,63 @@
+﻿@model CarsApp.ViewModels.ReviewEditViewModel
+@{
+    ViewData["Title"] = "Edit Review";
+}
+
+<h1>Edit Review</h1>
+<hr />
+<h5><b>@Html.DisplayNameFor(model => model.Review.Car.Name)</b>: @Html.DisplayFor(model => model.Review.Car.Name)</h5>
+<h5><b>@Html.DisplayNameFor(model => model.Review.EngineSize)</b>: @Html.DisplayFor(model => model.Review.EngineSize)</h5>
+<h5><b>@Html.DisplayNameFor(model => model.Review.EngineType)</b>: @Html.DisplayFor(model => model.Review.EngineType)</h5>
+<h5><b>@Html.DisplayNameFor(model => model.Review.Driver.FullName)</b>: @Html.DisplayFor(model => model.Review.Driver.FullName)</h5>
+<hr />
+<div class="row">
+    <form asp-action="EditReview" asp-route-id="@Model.Review.Id">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Review.Id" />
+        <div class="col-md-12">
+            <div class="form-group">
+                <label asp-for="Review.Car.Name" class="control-label"></label>
+                <input asp-for="Review.Car.Name" class="form-control" disabled />
+                <span asp-validation-for="Review.Car.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.EngineSize" class="control-label"></label>
+                <input asp-for="Review.EngineSize" class="form-control" disabled />
+                <span asp-validation-for="Review.EngineSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.EngineType" class="control-label"></label>
+                <input asp-for="Review.EngineType" class="form-control" disabled />
+                <span asp-validation-for="Review.EngineType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.FuelConsumption" class="control-label"></label>
+                <input asp-for="Review.FuelConsumption" class="form-control" />
+                <span asp-validation-for="Review.FuelConsumption" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.Description" class="control-label"></label>
+                <input asp-for="Review.Description" class="form-control" />
+                <span asp-validation-for="Review.Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+            <div>
+                <a asp-action="Reviews" asp-route-id="@Model.Review.DriverId">Back to Reviews</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

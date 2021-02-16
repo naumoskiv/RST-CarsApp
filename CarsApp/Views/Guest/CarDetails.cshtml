@@ -1,0 +1,47 @@
+﻿@model CarsApp.Models.Car
+
+@{
+    ViewData["Title"] = "Car Details";
+    var photoPath = "~/CarImages/" + (Model.CarPicture ?? "blankImage.png");
+}
+
+<h1>Car Details</h1>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Manufacturer.Name) @Html.DisplayFor(model => model.Name) | <a asp-controller="Cars" asp-action="ReviewsByCar" asp-route-id="@Model.Id">Reviews</a></h4>
+    <hr />
+    <img src="@photoPath"
+         height="480"
+         width="800"
+         asp-append-version="true" />
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Manufacturer.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ModelYear)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ModelYear)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Cars">Back to List</a>
+</div>

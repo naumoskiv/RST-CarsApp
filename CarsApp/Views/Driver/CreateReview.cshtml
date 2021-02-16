@@ -1,0 +1,56 @@
+﻿@model CarsApp.ViewModels.ReviewCreateViewModel
+@{
+    ViewData["Title"] = "Create Review";
+}
+
+<h1>Add a New Review</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="CreateReview">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Review.CarId" class="control-label"></label>
+                <select asp-for="Review.CarId" class="form-control" asp-items="ViewBag.CarId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.DriverId" class="control-label"></label>
+                <select asp-for="Review.DriverId" class="form-control" asp-items="ViewBag.DriverId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.EngineType" class="control-label"></label>
+                <input asp-for="Review.EngineType" class="form-control" />
+                <span asp-validation-for="Review.EngineType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.EngineSize" class="control-label"></label>
+                <input asp-for="Review.EngineSize" class="form-control" />
+                <span asp-validation-for="Review.EngineSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.FuelConsumption" class="control-label"></label>
+                <input asp-for="Review.FuelConsumption" class="form-control" />
+                <span asp-validation-for="Review.FuelConsumption" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.Description" class="control-label"></label>
+                <input asp-for="Review.Description" class="form-control" />
+                <span asp-validation-for="Review.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}
+

@@ -1,0 +1,68 @@
+﻿@model CarsApp.Models.Driver
+
+@{
+    ViewData["Title"] = "Reviews by Driver";
+    var photoPath = "~/DriverImages/" + (Model.DriverPicture ?? "blankImage.png");
+}
+
+
+<img src="@photoPath"
+    height="120" width="120"
+    asp-append-version="true"
+    style="float:left; margin-right:10px;" />
+<h2>@Html.DisplayFor(model => model.FullName)</h2>
+<h4>List of Reviewed Cars</h4>
+
+<p>
+    <a asp-action="CreateReview">Create a New Review</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Reviews.FirstOrDefault().Car.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reviews.FirstOrDefault().EngineSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reviews.FirstOrDefault().EngineType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reviews.FirstOrDefault().FuelConsumption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reviews.FirstOrDefault().Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Reviews)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EngineSize)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EngineType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FuelConsumption)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a asp-action="EditReview" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="ReviewDetails" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

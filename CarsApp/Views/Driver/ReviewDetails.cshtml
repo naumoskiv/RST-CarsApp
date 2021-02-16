@@ -1,0 +1,63 @@
+﻿@model CarsApp.Models.Review
+@{
+    ViewData["Title"] = "Review Details";
+}
+
+<h1>Review Details</h1>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Car.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Driver.FullName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Driver.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.ModelYear)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Car.ModelYear)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Car.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EngineSize)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EngineSize) Litres
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EngineType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EngineType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FuelConsumption)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FuelConsumption) L/100km
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="EditReview" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Reviews" asp-route-id="@Model.DriverId">Back to Reviews</a>
+</div>

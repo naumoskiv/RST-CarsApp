@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CarsApp.Models.Manufacturer>
+
+@{
+    ViewData["Title"] = "Manufacturers";
+}
+
+<h1>Manufacturers</h1>
+
+<form asp-controller="Driver" asp-action="Manufacturers" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-controller="Driver" asp-action="Manufacturers">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Logo
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                <a asp-controller="Guest" asp-action="Manufacturers" asp-route-sortOrder="@ViewData["CountrySortParm"]">@Html.DisplayNameFor(model => model.Country)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Headquarters)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Founded)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    var photoPath = "~/ManufacturerImages/" + (item.ManufacturerPicture ?? "blankImage.png");
+
+        <tr>
+            <td>
+                <img src="@photoPath"
+                     class="rounded-circle"
+                     height="40" width="40"
+                     asp-append-version="true" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Headquarters)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Founded)
+            </td>
+            <td>
+                <a asp-action="ManufacturerDetails" asp-route-id="@item.Id">Details</a> | 
+                <a asp-controller="Manufacturers" asp-action="CarsByManufacturer" asp-route-id="@item.Id">Models</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CarsApp.Models.Driver>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DriverPicture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LicenceSince)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Experience)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    var photoPath = "~/DriverImages/" + (item.DriverPicture ?? "blankImage.png");
+
+        <tr>
+            <td>
+                <img src="@photoPath"
+                     class="rounded-circle"
+                     height="40" width="40"
+                     asp-append-version="true" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LicenceSince)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Experience) Years
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a asp-controller="Admin" asp-action="DriverProfile" asp-route-driverId="@item.Id">Profile</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
